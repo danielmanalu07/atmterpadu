@@ -1,0 +1,42 @@
+﻿@using System.Text.Json
+@inject IWebHostEnvironment Environment
+
+@{
+    ViewData["Title"] = "Rinel React App";
+
+    var manifestPath = System.IO.Path.Combine(
+        Environment.WebRootPath,
+        "react",
+        ".vite",
+        "manifest.json"
+    );
+
+    using var manifest = JsonDocument.Parse(
+        System.IO.File.ReadAllText(manifestPath)
+    );
+
+    var entry = manifest.RootElement.GetProperty(
+        "src/main.tsx"
+    );
+
+    var jsFile = entry.GetProperty("file").GetString();
+
+    var cssFiles = entry.TryGetProperty("css", out var css)
+        ? css.EnumerateArray()
+            .Select(x => x.GetString()!)
+            .ToList()
+        : new List<string>();
+
+    var jsUrl = Url.Content("~/react/" + jsFile);
+}
+
+<div id="react-root"></div>
+
+@foreach (var cssFile in cssFiles)
+{
+    var cssUrl = Url.Content("~/react/" + cssFile);
+
+    <link rel="stylesheet" href="@cssUrl" />
+}
+
+<script type="module" src="@jsUrl"></script>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ATMTerpaduApp</name>
+    </assembly>
+    <members>
+        <member name="M:RinelReactApp.Controllers.Api.StatusController.Get">
+            <summary>
+            CONTOH DOKUMENTASI API CONTROLLER
+            </summary>
+            <remarks>
+            Hanya untuk return JSON saja
+            </remarks>
+        </member>
+        <member name="T:Program">
+            <summary>
+            Auto-generated public partial Program class for top-level statement apps.
+            </summary>
+        </member>
+    </members>
+</doc>
